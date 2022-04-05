@@ -35,5 +35,5 @@ def print_item(parent_level):
 + "permalink: /" + (.info.name | ascii_downcase | gsub("\b";"-")) + "/\n"
 + "category: post" + "\n"
 + "---\n\n"
-+ (.info.description | sub("\n#";"\n<!--more-->\n\n#")) + "\n"
++ (.info.description | sub("\n#";"\n<!--more-->\n\n#") | gsub("\n> ⛔️ (?<alert>.*\\.\n)";("\n{% include alert.html content=\""+ .alert +"\" level=\"danger\" %}\n");"m")) + "\n\n"
 + (.item | map(. | print_item("")) | join("\n"))

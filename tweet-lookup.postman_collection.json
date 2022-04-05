@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "8f12c1ed-f930-4e0d-8baf-c8a949910229",
-		"name": "Guess how Tweets lookup parameters works",
+		"name": "Guess how Tweets lookup parameters work",
 		"description": "This collection is a companion to the [What can we learn from tweets lookup error responses of Twitter v2 API?](https://apihandyman.io/what-can-we-learn-from-tweets-lookup-error-responses-of-twitter-v2-api/) API Handyman blog post. It aims to demonstrate how you can learn to use the Twitter v2 API Tweets lookup functions parameters without reading much of the documentation. It comes with 2 additional bonuses. First, you can reuse that technique with many APIs. Second, you may also learn a few API design, implementation, and documentation principles.\n\n# Twitter v2 API Tweets Lookup\n\nWith Twitter v2 API, you can get tweets using [the lookup operations](https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/introduction) `GET /2/tweets/:tweetid` (single tweet) and `GET /2/tweets?ids=:tweetId1,tweetId2,...tweetId100` (multiple tweets). By not providing or providing parameters with wrong values, we'll be able to understand how these operations work.\n\n## Notes about the collection\n\nThe [collection](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229) takes advantage of collection and environment variables.\n\n### Environment variables\n\nThe collection requires the creation of an environment containing the following variables. (Try to send a request without an environment or the following variables and [you'll get a surprise error message](https://apihandyman.io/we-always-forget-to-select-a-postman-environment/)).\n\n> ⛔️ Never store API tokens in initial value. Read [How to use API Keys](https://blog.postman.com/how-to-use-api-keys/) to learn more.\n\n| **VARIABLE** | **DESCRIPTION** |\n| --- | --- |\n| twitter_token | A Twitter API bearer token (Read [Twitter API documentation](https://developer.twitter.com/en/docs/authentication/oauth-2-0/bearer-tokens) to get one) used in Authorization tab of the collection |\n\n### Collection variables\n\nThe collection uses the following collection variables:\n\n| **VARIABLE** | **DESCRIPTION** |\n| --- | --- |\n| tweet_id | A real working tweet id. Feel free to update with one of your likings. To get this id, go to the Twitter website and open a tweet by clicking on it. You'll see a URL like this one [https://twitter.com/apihandyman/status/1387820661742112771](https://twitter.com/apihandyman/status/1387820661742112771) , the id is number number after status. Used in [Retrieve a single tweet](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229?entity=folder-a06061d4-092c-4a71-87b6-a04c925154d1), [Retrieve multiple tweets](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229?entity=folder-87eabafa-a6bc-4de0-864d-02cdbe819719), and Wrap up folders. |\n| unknown_tweet_id | The id of a tweet that doesn't exists anymore. No need to modify this value. Used by requests of [What happens when a tweet is not found](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229?entity=folder-4bdae358-e117-4352-804e-be51496100a8) folder. |\n| expansions_default_value | A variable holding all possible values of `expansions` parameter. Used in [Get always dame data folder](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229?entity=folder-c5fde22c-0ee1-4e2b-955d-b33ecd5aedb1). |\n| tweet_fields_default_value | A variable holding all possible values of `tweet.fields` parameter. Used in [Get always dame data folder](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229?entity=folder-c5fde22c-0ee1-4e2b-955d-b33ecd5aedb1). |\n| media_fields_default_value | A variable holding all possible values of `media.fields` parameter. Used in [Get always dame data folder](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229?entity=folder-c5fde22c-0ee1-4e2b-955d-b33ecd5aedb1). |\n| poll_fields_default_value | A variable holding all possible values of `poll.fields` parameter. Used in [Get always dame data folder](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229?entity=folder-c5fde22c-0ee1-4e2b-955d-b33ecd5aedb1). |\n| place_fields_default_value | A variable holding all possible values of `place.fields` parameter. Used in [Get always dame data folder](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229?entity=folder-c5fde22c-0ee1-4e2b-955d-b33ecd5aedb1). |\n| user_fields_default_value | A variable holding all possible values of `user.fields` parameter. Used in [Get always dame data folder](https://apihandyman.postman.co/workspace/Twitter-v2-API-Tips-and-Tricks~16b83fae-c500-4387-b79c-0c72565d1d0f/documentation/143378-8f12c1ed-f930-4e0d-8baf-c8a949910229?entity=folder-c5fde22c-0ee1-4e2b-955d-b33ecd5aedb1). |\n| token_variable_name | Used by some [pre-script magic that checks an environment is selected](https://apihandyman.io/we-always-forget-to-select-a-postman-environment/). No need to modify this value. |\n| token_variable_default_value | Used by some [pre-script magic that checks an environment is selected](https://apihandyman.io/we-always-forget-to-select-a-postman-environment/). No need to modify this value. |",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -50,7 +50,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets/1387820661742112771",
+									"raw": "https://api.twitter.com/2/tweets/{{tweet_id}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -60,7 +60,7 @@
 									"path": [
 										"2",
 										"tweets",
-										"1387820661742112771"
+										"{{tweet_id}}"
 									]
 								}
 							},
@@ -250,7 +250,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets/1387820661742112771?dummy=value",
+									"raw": "https://api.twitter.com/2/tweets/{{tweet_id}}?dummy=value",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -260,7 +260,7 @@
 									"path": [
 										"2",
 										"tweets",
-										"1387820661742112771"
+										"{{tweet_id}}"
 									],
 									"query": [
 										{
@@ -496,7 +496,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets/1387820661742112771?id=dummy&expansions=dummy&tweet.fields=dummy&media.fields=dummy&poll.fields=dummy&place.fields=dummy&user.fields=dummy",
+									"raw": "https://api.twitter.com/2/tweets/{{tweet_id}}?id=dummy&expansions=dummy&tweet.fields=dummy&media.fields=dummy&poll.fields=dummy&place.fields=dummy&user.fields=dummy",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -506,7 +506,7 @@
 									"path": [
 										"2",
 										"tweets",
-										"1387820661742112771"
+										"{{tweet_id}}"
 									],
 									"query": [
 										{
@@ -772,7 +772,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets/1387820661742112771?expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,non_public_metrics,organic_metrics,possibly_sensitive,promoted_metrics,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets/{{tweet_id}}?expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,non_public_metrics,organic_metrics,possibly_sensitive,promoted_metrics,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -782,12 +782,12 @@
 									"path": [
 										"2",
 										"tweets",
-										"1387820661742112771"
+										"{{tweet_id}}"
 									],
 									"query": [
 										{
 											"key": "id",
-											"value": "1387820661742112771",
+											"value": "{{tweet_id}}",
 											"description": "It does not make any sense to use id query param (already present as path param)",
 											"disabled": true
 										},
@@ -1037,7 +1037,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets/1387820661742112771?expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets/{{tweet_id}}?expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -1047,7 +1047,7 @@
 									"path": [
 										"2",
 										"tweets",
-										"1387820661742112771"
+										"{{tweet_id}}"
 									],
 									"query": [
 										{
@@ -1952,7 +1952,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets?ids=1387820661742112771&expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,non_public_metrics,organic_metrics,possibly_sensitive,promoted_metrics,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets?ids={{tweet_id}}&expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,non_public_metrics,organic_metrics,possibly_sensitive,promoted_metrics,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -1966,7 +1966,7 @@
 									"query": [
 										{
 											"key": "ids",
-											"value": "1387820661742112771"
+											"value": "{{tweet_id}}"
 										},
 										{
 											"key": "expansions",
@@ -2211,7 +2211,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets?ids=1387820661742112771&expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets?ids={{tweet_id}}&expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -2225,7 +2225,7 @@
 									"query": [
 										{
 											"key": "ids",
-											"value": "1387820661742112771"
+											"value": "{{tweet_id}}"
 										},
 										{
 											"key": "expansions",
@@ -2393,7 +2393,7 @@
 					]
 				}
 			],
-			"description": "# GET /2/tweets\n\nNow we could directly send a `GET /tweets?ids=xxx` with the parameters we have discovered when retrieving a single tweet and it would work. But just for the sake of science, let's try the same method again and check there are not more parameters than we have discovered.\n\nWhat Twitter [Reference Documentation](https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets) says:\n\n> Returns a variety of information about the Tweet specified by the requested ID or list of IDs.\n\nWhen I see `GET /tweets`, I immediately think \"I can search in tweets\", and that, for instance, I could get tweets between 2 dates or using a given hashtag, but it's absolutely not the case here. The documentation could be slightly improved by clearly stating this operation is not made to search tweets but just to retrieve up to 100 tweets at once (and avoid calling `GET /2/tweets/:id` 100 times). To search tweets, read \"[Search Tweets](https://developer.twitter.com/en/docs/twitter-api/tweets/search/introduction)\"."
+			"description": "Now we could directly send a `GET /tweets?ids=xxx` with the parameters we have discovered when retrieving a single tweet and it would work. But just for the sake of science, let's try the same method again and check there are not more parameters than we have discovered.\n\nWhat Twitter [Reference Documentation](https://developer.twitter.com/en/docs/twitter-api/tweets/lookup/api-reference/get-tweets) says:\n\n> Returns a variety of information about the Tweet specified by the requested ID or list of IDs.\n\nWhen I see `GET /tweets`, I immediately think \"I can search in tweets\", and that, for instance, I could get tweets between 2 dates or using a given hashtag, but it's absolutely not the case here. The documentation could be slightly improved by clearly stating this operation is not made to search tweets but just to retrieve up to 100 tweets at once (and avoid calling `GET /2/tweets/:id` 100 times). To search tweets, read \"[Search Tweets](https://developer.twitter.com/en/docs/twitter-api/tweets/search/introduction)\"."
 		},
 		{
 			"name": "What happens when a tweet is not found",
@@ -2439,7 +2439,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets/1508806917874978822",
+									"raw": "https://api.twitter.com/2/tweets/{{unknown_tweet_id}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -2449,7 +2449,7 @@
 									"path": [
 										"2",
 										"tweets",
-										"1508806917874978822"
+										"{{unknown_tweet_id}}"
 									]
 								}
 							},
@@ -2669,7 +2669,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets?ids=1508806917874978822&expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets?ids={{unknown_tweet_id}}&expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -2683,7 +2683,7 @@
 									"query": [
 										{
 											"key": "ids",
-											"value": "1508806917874978822"
+											"value": "{{unknown_tweet_id}}"
 										},
 										{
 											"key": "expansions",
@@ -2928,7 +2928,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets?ids=1508806917874978822,1387820661742112771&expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets?ids={{unknown_tweet_id}},{{tweet_id}}&expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -2942,7 +2942,7 @@
 									"query": [
 										{
 											"key": "ids",
-											"value": "1508806917874978822,1387820661742112771"
+											"value": "{{unknown_tweet_id}},{{tweet_id}}"
 										},
 										{
 											"key": "expansions",
@@ -3186,7 +3186,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets/1387820661742112771?expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets/{{tweet_id}}?expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -3196,7 +3196,7 @@
 									"path": [
 										"2",
 										"tweets",
-										"1387820661742112771"
+										"{{tweet_id}}"
 									],
 									"query": [
 										{
@@ -3460,7 +3460,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets/1387820661742112771?expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets/{{tweet_id}}?expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -3470,7 +3470,7 @@
 									"path": [
 										"2",
 										"tweets",
-										"1387820661742112771"
+										"{{tweet_id}}"
 									],
 									"query": [
 										{
@@ -3719,7 +3719,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets/1387820661742112771?expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets/{{tweet_id}}?expansions={{expansions_default_value}}&tweet.fields={{tweet_fields_default_value}}&media.fields={{media_fields_default_value}}&poll.fields={{poll_fields_default_value}}&place.fields={{place_fields_default_value}}&user.fields={{user_fields_default_value}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -3729,32 +3729,32 @@
 									"path": [
 										"2",
 										"tweets",
-										"1387820661742112771"
+										"{{tweet_id}}"
 									],
 									"query": [
 										{
 											"key": "expansions",
-											"value": "author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id"
+											"value": "{{expansions_default_value}}"
 										},
 										{
 											"key": "tweet.fields",
-											"value": "attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld"
+											"value": "{{tweet_fields_default_value}}"
 										},
 										{
 											"key": "media.fields",
-											"value": "alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width"
+											"value": "{{media_fields_default_value}}"
 										},
 										{
 											"key": "poll.fields",
-											"value": "duration_minutes,end_datetime,id,options,voting_status"
+											"value": "{{poll_fields_default_value}}"
 										},
 										{
 											"key": "place.fields",
-											"value": "contained_within,country,country_code,full_name,geo,id,name,place_type"
+											"value": "{{place_fields_default_value}}"
 										},
 										{
 											"key": "user.fields",
-											"value": "created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld"
+											"value": "{{user_fields_default_value}}"
 										}
 									]
 								}
@@ -3975,7 +3975,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://api.twitter.com/2/tweets?ids=1387820661742112771&expansions=author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id&tweet.fields=attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld&media.fields=alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width&poll.fields=duration_minutes,end_datetime,id,options,voting_status&place.fields=contained_within,country,country_code,full_name,geo,id,name,place_type&user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+									"raw": "https://api.twitter.com/2/tweets?ids={{tweet_id}}&expansions={{expansions_default_value}}&tweet.fields={{tweet_fields_default_value}}&media.fields={{media_fields_default_value}}&poll.fields={{poll_fields_default_value}}&place.fields={{place_fields_default_value}}&user.fields={{user_fields_default_value}}",
 									"protocol": "https",
 									"host": [
 										"api",
@@ -3989,31 +3989,31 @@
 									"query": [
 										{
 											"key": "ids",
-											"value": "1387820661742112771"
+											"value": "{{tweet_id}}"
 										},
 										{
 											"key": "expansions",
-											"value": "author_id,referenced_tweets.id,referenced_tweets.id.author_id,entities.mentions.username,attachments.poll_ids,attachments.media_keys,in_reply_to_user_id,geo.place_id"
+											"value": "{{expansions_default_value}}"
 										},
 										{
 											"key": "tweet.fields",
-											"value": "attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld"
+											"value": "{{tweet_fields_default_value}}"
 										},
 										{
 											"key": "media.fields",
-											"value": "alt_text,duration_ms,height,media_key,non_public_metrics,organic_metrics,preview_image_url,promoted_metrics,public_metrics,type,url,width"
+											"value": "{{media_fields_default_value}}"
 										},
 										{
 											"key": "poll.fields",
-											"value": "duration_minutes,end_datetime,id,options,voting_status"
+											"value": "{{poll_fields_default_value}}"
 										},
 										{
 											"key": "place.fields",
-											"value": "contained_within,country,country_code,full_name,geo,id,name,place_type"
+											"value": "{{place_fields_default_value}}"
 										},
 										{
 											"key": "user.fields",
-											"value": "created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld"
+											"value": "{{user_fields_default_value}}"
 										}
 									]
 								}
